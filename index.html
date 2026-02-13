@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صلاح & ريتاج ❤️</title>
+    <style>
+        :root {
+            --pink: #ff4d6d;
+            --purple: #7209b7;
+            --light-pink: #ff85a1;
+            --bg: #0f0113;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg), #240046);
+            color: white; font-family: 'Cairo', sans-serif;
+            margin: 0; text-align: center; overflow-x: hidden;
+        }
+
+        .falling-elements {
+            position: fixed; top: -50px; pointer-events: none; z-index: 999;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        #login-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg); display: flex; justify-content: center; align-items: center; z-index: 10000;
+        }
+        .login-card {
+            background: rgba(255, 77, 109, 0.1); padding: 40px; border-radius: 30px;
+            border: 2px solid var(--pink); backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px var(--pink); width: 85%; max-width: 350px;
+        }
+        input {
+            background: white; border: none; padding: 15px; color: var(--purple);
+            border-radius: 50px; text-align: center; font-size: 1.2rem; margin: 20px 0; width: 90%;
+            outline: none;
+        }
+        .enter-btn {
+            background: var(--pink); color: white; border: none; padding: 12px 40px;
+            border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px var(--pink);
+        }
+
+        .counter-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;
+            max-width: 300px; margin: 40px auto;
+        }
+        .count-box {
+            background: rgba(255, 255, 255, 0.05); border: 2px solid var(--pink);
+            padding: 15px; border-radius: 20px; box-shadow: 0 0 10px var(--pink);
+        }
+        .count-box span { display: block; font-size: 1.8rem; font-weight: bold; color: var(--pink); }
+
+        .station { max-width: 500px; margin: 60px auto; padding: 15px; }
+        
+        .photo-caption-top {
+            color: var(--light-pink); font-size: 1.2rem; font-weight: bold;
+            margin-bottom: 10px; text-shadow: 0 0 5px var(--pink);
+        }
+
+        .music-gate {
+            background: linear-gradient(45deg, var(--purple), var(--pink));
+            color: white; border: none; width: 100%; padding: 18px;
+            border-radius: 50px; font-size: 1.1rem; cursor: pointer;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .photo-frame {
+            border: 3px solid var(--pink); border-radius: 25px; overflow: hidden;
+            margin-bottom: 35px; box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        .photo-frame img { width: 100%; display: block; }
+        video { width: 100%; border-radius: 25px; border: 3px solid var(--light-pink); }
+
+        .love-letter {
+            background: rgba(255, 77, 109, 0.1); padding: 25px; border-radius: 30px;
+            border: 1px solid var(--pink); margin: 40px 15px; line-height: 1.8;
+            font-size: 1.1rem; text-align: justify; color: #ffe5ec; direction: rtl;
+        }
+    </style>
+</head>
+<body onload="initDecorations()">
+
+    <div id="login-screen">
+        <div class="login-card">
+            <h2 style="color: var(--pink);">ريتاج & صلاح ❤️</h2>
+            <p style="color: #fff;">ادخلي الباسورد يا دنيتي</p>
+            <input type="password" id="passCode" placeholder="اكتبيه هنا...">
+            <br>
+            <button class="enter-btn" onclick="checkPass()">ادخلي يا قلبي ❤️</button>
+        </div>
+    </div>
+
+    <div id="main-content" style="display:none;">
+        <h2 style="color: var(--light-pink); margin-top: 30px;">حكايتنا بدأت من.. ❤️</h2>
+        
+        <div class="counter-grid">
+            <div class="count-box"><span id="days">0</span>يوم</div>
+            <div class="count-box"><span id="hours">0</span>ساعة</div>
+            <div class="count-box"><span id="mins">0</span>دقيقة</div>
+            <div class="count-box"><span id="secs">0</span>ثانية</div>
+        </div>
+
+        <div class="station">
+            <button class="music-gate" onclick="playPart(1)">دوسي هنا🤭  🎵</button>
+            <audio id="track1" src="https://files.catbox.moe/hn11ez.mp3" preload="auto"></audio>
+            
+            <div class="photo-caption-top">انتي أجمل صدفة في عمري ❤️</div>
+            <div class="photo-frame"><img src="https://files.catbox.moe/m3bf1u.jpg"></div>
+            
+            <div class="photo-caption-top">ضحكتك هي اللي منورة حياتي 💖</div>
+            <div class="photo-frame"><img src="https://files.catbox.moe/nnxhai.jpg"></div>
+        </div>
+
+        <div class="station" id="video-station">
+            <h3 style="color: var(--pink);">فيديو عشانك 🎥</h3>
+            <video id="main-video" src="https://files.catbox.moe/cwccj6.mp4" controls playsinline></video>
+        </div>
+
+        <div class="station">
+            <button class="music-gate" onclick="playPart(2)">اسمعي دي علشانك  🎵</button>
+            <audio id="track2" src="https://files.catbox.moe/gvii2x.mp3" preload="auto"></audio>
+            
+            <div class="photo-caption-top">يا أغلى من روحي عليّ ⭐</div>
+            <div class="photo-frame"><img src="https://files.catbox.moe/epjpvj.jpg"></div>
+            
+            <div class="photo-caption-top">هفضل أحبك لآخر نفس فيّ ❤️</div>
+            <div class="photo-frame"><img src="https://files.catbox.moe/6rk87a.jpg"></div>
+        </div>
+
+        <div class="love-letter">
+             عاوز اقولك اني بحبك اوي ومحبتش قدك يا حته مني وعمر ما عيني تشوف غيرك ولا تفكر تبص لغيرك ولا قلبي ينبض لغيرك ومستحيل اسيبك يمراتي لانك روحي ومحدش بيسيب روحه ولا يتخلي عنها يحته عارفه طول النهار بفضل افكر فيكي وبتبقي وحشاني اوي وبستني الوقت ال بكلمك فيه وبجد عيني عمرها ما تشوف اجمل منك بحبك اوي وبدمنك وبعشقك بحب عينك اوي وملامحك وكل حاجه فيكي ربنا يخليكي ليا وهفضل مستني اليوم اللي تبقي من نصيبي فيه
+            <br><br>
+            <center><b style="font-size: 1.4rem; color: var(--pink);">بحبككككككك مووووووت 😍🌍🏠</b></center>
+        </div>
+        <div style="font-size: 3rem; padding-bottom: 50px;">💖</div>
+    </div>
+
+    <script>
+        const startTimestamp = new Date("2024-10-15T00:00:00").getTime();
+
+        function checkPass() {
+            if(document.getElementById('passCode').value === "2008") {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                
+                // حل مشكلة الصوت: تفعيل الميديا فور الدخول
+                document.querySelectorAll('audio, video').forEach(m => {
+                    m.play().then(() => { m.pause(); }).catch(e => console.log(e));
+                });
+
+                setInterval(updateCounter, 1000);
+                setupVideoAutoPlay();
+            } else { alert("الباسورد غلط يا ريتاج 😉"); }
+        }
+
+        function updateCounter() {
+            const diff = new Date().getTime() - startTimestamp;
+            document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("secs").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }
+
+        function setupVideoAutoPlay() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const v = document.getElementById('main-video');
+                        document.querySelectorAll('audio').forEach(a => a.pause());
+                        v.muted = false; // تشغيل بالصوت
+                        v.play().catch(() => {});
+                    }
+                });
+            }, { threshold: 0.5 });
+            observer.observe(document.getElementById('video-station'));
+        }
+
+        function playPart(num) {
+            document.getElementById('main-video').pause();
+            document.querySelectorAll('audio').forEach(a => a.pause());
+            const track = document.getElementById('track' + num);
+            track.currentTime = 0;
+            track.play().catch(e => alert("اضغطي مرة تانية لتشغيل الصوت"));
+        }
+
+        function initDecorations() {
+            const elements = ['✨', '💖', '⭐', '🌸', '❤️'];
+            setInterval(() => {
+                const el = document.createElement('div');
+                el.className = 'falling-elements';
+                el.innerHTML = elements[Math.floor(Math.random() * elements.length)];
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.fontSize = Math.random() * 20 + 10 + 'px';
+                el.style.animationDuration = Math.random() * 3 + 2 + 's';
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 5000);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
